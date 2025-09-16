@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>curring</title>
+</head>
+<body>
+    <script>
+        //curring in js is used  jab apko all parameters available hongy tb e woh function ko run krayega 
+        //e.g. aik param api se ana h aik user se ana ha aik kahin orn se 
+        // to api time lgyegi isloye ap wait krogy jb tk saray param ni ajkaty
+
+
+        function add(a)
+        {
+           return  function(b){
+            return function(c){
+                console.log( a+b+c);
+            }
+           }
+        }
+        <!-- console.log(add(10)(20)(30)); -->
+
+        let param1=add(10);
+        let param2=param1(20);
+        let param3=param2(30);
+    </script>
+</body>
+</html>

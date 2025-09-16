@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>simple to do list</title>
+    <style>
+        body{
+            justify-content: center;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ece9e6, #ffffff);
+            background: url("todo\ list.png");
+            background-size: cover;
+        }
+        #input-task{
+            width: 300px;
+            height: 45px;
+            border: 2px solid #444;
+            border-radius: 10px;
+            margin-top: 30px;
+            padding: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s ease;
+        }
+        #input-task:focus{
+            border-color: #007bff;
+            box-shadow: 0px 0px 8px rgba(0, 123, 255, 0.5);
+        }
+        #add-task{
+            background-color: #007bff;
+            width: 160px;
+            height: 45px;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            margin-top: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        #add-task:hover{
+            background-color: #0056b3;
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        }
+        .taskcontainer{
+            width: 450px;
+            min-height: 100px;
+            border: 2px solid #444;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 10px;
+            padding: 15px;
+            background: #f9f9f9;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+        }
+        #task-list{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #task-list li{
+            background: #ffffff;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: left;
+            box-shadow: 0px 3px 6px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+        #task-list li:hover{
+            transform: translateX(5px);
+            background: #f1f1f1;
+        }
+        h1{
+            font-size: 40px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+    <h1>todo list app </h1>
+    <input id="input-task" type="text" placeholder="add new task" >
+    <br>
+    <button id="add-task">add task</button>
+
+    <div class="taskcontainer">
+     <ul id="task-list"></ul>
+   </div>
+    <script>
+        let input=document.getElementById("input-task");
+        let addTask=document.getElementById("add-task");
+        let tasklist=document.getElementById("task-list");
+        
+        addTask.addEventListener("click",function(){
+            let tasktext=input.value.trim();
+
+            if(tasktext==""){
+                alert("please enter a task first");
+                return;
+            }
+            const li=document.createElement("li");
+            li.textContent=tasktext;
+            tasklist.appendChild(li);
+            input.value="";
+        })
+    </script>
+</body>
+</html>

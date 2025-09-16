@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Random Quote Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #444;
+    }
+
+    #quote {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin: 20px 0;
+      color: #222;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #667eea;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #764ba2;
+      transform: scale(1.05);
+    }
+
+    p {
+      margin-top: 15px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+    
+  <div class="container">
+    <h2>Random joke Generator <span>by hassan ali (api)</span></h2>
+    <p id="joke">Loading...</p>
+    <button id="newjoke">Get Quote</button>
+    <p>Click the button to get a new joke</p>
+  </div>
+
+  <script>
+    let jokedisplay = document.getElementById("joke");
+    let btn = document.getElementById("newjoke");
+
+    async function getQuote(){
+      jokedisplay.textContent = "Loading..."; 
+
+      try {
+        const response = await fetch("https://official-joke-api.appspot.com/random_joke");
+        const data = await response.json();
+
+        jokedisplay.textContent = `"${data.setup}" \n\n ${data.punchline}`;
+      }
+      catch(error){
+        jokedisplay.innerText = "Failed to fetch joke. Try again!";
+      }
+    }
+
+    getQuote();
+    btn.addEventListener("click", getQuote);
+  </script>
+</body>
+</html>

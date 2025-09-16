@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>counter app</title>
+<style>
+    body{
+        font-family: sans-serif;
+        margin-top: 50px;
+        align-items: center;
+        text-align:center;
+        justify-content: center; 
+background-color: rgb(233, 185, 126);
+    }
+    #count{
+        height: 100px;
+        width: 310px;
+        font-size: 30px;
+        border: 4 px solid black;
+        text-align: center;
+        align-items: center;
+        margin-left:450px;
+
+background-color: rgb(198, 223, 223);
+    }
+    button{
+        width: 100px;
+        height: 70px;
+        background-color: rgb(83, 83, 196);
+        color: white;
+        border-radius: 2px;
+        margin-top: 20px;
+        margin-right: 10px;
+    }
+</style>
+</head>
+<body>
+    <h1>counter app</h1>
+    <!-- increment and decrement and reset buttons -->
+<div id="count"></div>
+<button id="increment">increment</button>
+<button id="decrement">decrement</button>
+<button id="reset">reset</button>
+
+
+<script>
+let count=0;
+let counter=document.getElementById("count");
+let inc=document.getElementById("increment");
+let dec=document.getElementById("decrement");
+let reset=document.getElementById("reset");
+
+function counterupdate(){
+    counter.textContent=count;
+}
+inc.addEventListener("click",
+function(){
+count++;
+counterupdate();
+});
+dec.addEventListener("click",
+function(){
+count--;
+counterupdate();
+});
+
+reset.addEventListener("click",function(){
+    count=0;
+counterupdate();
+})
+
+
+</script>
+</body>
+</html>

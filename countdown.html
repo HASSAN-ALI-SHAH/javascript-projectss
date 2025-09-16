@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background:url("countyer.png");
+      background-size: cover;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      display: flex;
+      flex-direction:column  ;
+    }
+    .clock-container {
+      background: #333;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: none;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    #clock {
+      font-size: 50px;
+      margin: 20px 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+      h1 {
+      color: white;
+      background: rgba(0, 0, 0, 0.5); /* transparent black box */
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      
+    }
+  </style>
+</head>
+<body>
+    <h1>countdown app</h1>
+  <div class="clock-container">
+    <input type="number" id="minutes" placeholder="Enter minutes">
+    <p id="clock">00:00</p>
+    <button onclick="startCountdown()">Start Countdown</button>
+  </div>
+
+  <script>
+    let countdown;
+
+    function startCountdown() {
+      clearInterval(countdown);
+
+      let minutes = parseInt(document.getElementById("minutes").value);
+
+      if (isNaN(minutes) || minutes <= 0) {
+        alert("Please enter valid minutes!");
+        return;
+      }
+
+      let seconds = minutes * 60;
+
+      function updateTimer() {
+        let min = Math.floor(seconds / 60);
+        let sec = seconds % 60;
+
+        document.getElementById("clock").textContent =
+          (min < 10 ? "0" : "") + min + ":" + (sec < 10 ? "0" : "") + sec;
+
+        if (seconds > 0) {
+          seconds--;
+        } else {
+          clearInterval(countdown);
+          document.getElementById("clock").textContent = "Time's Up!";
+        }
+      }
+
+      updateTimer();
+      countdown = setInterval(updateTimer, 1000);
+    }
+  </script>
+</body>
+</html>

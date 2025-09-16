@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>guess the number game</title>
+    <style>
+        body{
+            font-family: 'Times New Roman', Times, serif;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+background: url("guessnumber.png");
+background-size: cover;
+        }
+        h1{
+            color: brown;
+            font-size: 30px;
+            margin-top: 180px;
+
+        }
+#guess{
+    width: 100px;
+    height: 45px;
+    background-color: darkcyan;
+    color: black;
+    border: 2 px solid;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+p{
+margin-top: 30px;
+color: rgb(202, 192, 192);
+font-size: 30px;
+
+}
+input{
+    height: 50px;
+    width: 300px;
+    border: 4px solid black;
+}
+    </style>
+</head>
+
+<body>
+    <h1>
+
+🎲guess the number game</h1>
+    <input type="text" id="input" placeholder="✍️guess the number">
+    <br>
+    <button onclick="checkGuess()" id="guess">submit</button>
+    <p id="message">guess the number correctly!
+
+🤔</p>
+
+
+    <script>
+        let count=0;
+       let random=Math.floor(Math.random()*100+1);
+        console.log(random);
+        function checkGuess(){
+            count++;
+   let guess=document.getElementById("input").value;
+
+   let messasge=document.getElementById("message");
+   if(guess==random){
+    messasge.textContent=`🏆congrats you guess the number in ${count} attempts`;
+   }
+   else if(guess<random)
+   {
+    messasge.textContent="❌too low!";
+   }
+   else
+   {
+     messasge.textContent="too high!";
+   }
+
+        }
+
+     
+
+        
+        
+    </script>
+</body>
+</html>

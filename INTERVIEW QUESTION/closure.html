@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>closure in java script</h1>
+
+    <script>
+        //closure are the function inside the function 
+function greetings(){
+    let name="hassan ali";
+    function sayname(){
+        console.log(name);
+    }
+    sayname();
+}
+greetings();
+
+//by returning a function
+
+
+function greetings(){
+    let name="hassan ali";
+    function sayname(){
+        console.log(name);
+    }
+
+    return sayname;
+}
+let fn=greetings();
+fn();
+fn();
+fn();
+
+
+    </script>
+</body>
+</html>

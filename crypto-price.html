@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crypto Price Converter</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      background: #0d0d0d; /* Dark background */
+      color: #e6e6e6; /* Light text */
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 600px;
+      border: 2px solid #00ff99;
+      border-radius: 14px;
+      margin: 40px auto;
+      padding: 25px;
+      background: #1a1a1a; /* Card background */
+      box-shadow: 0px 0px 20px #00ff99;
+    }
+
+    input {
+      margin-bottom: 20px;
+      border: 1px solid #00ff99;
+      border-radius: 8px;
+      width: 70%;
+      height: 35px;
+      padding: 5px 10px;
+      background: #262626;
+      color: #00ff99;
+      font-size: 16px;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #999;
+    }
+
+    button {
+      border: none;
+      background-color: #00ff99;
+      color: #0d0d0d;
+      width: 120px;
+      height: 40px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-color: #00cc77;
+      transform: scale(1.05);
+    }
+
+    h2 {
+      font-size: 36px;
+      margin-bottom: 20px;
+      color: #00ffcc;
+    }
+
+    .price-box {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #00ffcc;
+      border-radius: 10px;
+      background: #141414;
+      box-shadow: 0px 0px 15px rgba(0, 255, 204, 0.5);
+    }
+
+    .price-box p {
+      font-size: 18px;
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>💹 Crypto Price Checker</h2>
+    <input type="text" id="coininput" placeholder="Enter coin name (e.g. bitcoin)">
+    <button id="search">Search</button>
+    <div id="result">Result will display here</div>
+  </div>
+
+  <script>
+    let coin = document.getElementById("coininput");
+    let result = document.getElementById("result");
+
+    document.getElementById("search").addEventListener("click", getprice);
+
+    async function getprice(){
+      let coinname = coin.value.trim().toLowerCase();
+
+      if(coinname === ""){
+        result.innerText = "⚠️ Please enter a coin name!";
+        return;
+      }
+
+      try {
+        let url = `https://api.coingecko.com/api/v3/simple/price?ids=${coinname}&vs_currencies=usd,pkr&include_24hr_change=true&include_last_updated_at=true`;
+
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if(!data[coinname]){
+          result.innerText = "❌ Invalid coin name! Try e.g. bitcoin, ethereum, dogecoin";
+          return;
+        }
+
+        let coinData = data[coinname];
+        result.innerHTML = `
+          <div class="price-box">
+            <h2>${coinname.toUpperCase()}</h2>
+            <p>💵 USD: $${coinData.usd}</p>
+            <p>🇵🇰 PKR: Rs ${coinData.pkr.toLocaleString()}</p>
+            <p>📈 24h Change: ${coinData.usd_24h_change.toFixed(2)}%</p>
+            <p>🕒 Last Updated: ${new Date(coinData.last_updated_at * 1000).toLocaleTimeString()}</p>
+          </div>
+        `;
+      } catch (error) {
+        result.innerText = "⚠️ Error fetching data!";
+        console.error("Error:", error);
+      }
+    }
+  </script>
+</body>
+</html>

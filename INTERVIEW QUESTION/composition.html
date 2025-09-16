@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=scr, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>composition in js</h1>
+    <script>
+//let spose apne aik funtion bnya jo do value ko add kry
+//aik or function bnya jo us added value ka square find kry  
+//to ap aik compose function bnaien jismain aik function mn dosra function pass krdn
+function add(a,b){
+    return a+b;
+}
+function square(val){
+    return val*val;
+}
+function multiply(a,b){
+    return a*b;
+}
+function compositionFunction(fn1,fn2){
+    return function(a,b){
+        return fn2(fn1(a,b));
+    }
+
+}
+const task=compositionFunction(multiply,square);
+console.log(task(2,3));
+
+
+
+    </script>
+</body>
+</html>

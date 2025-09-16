@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: rgba(66, 2, 2, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #ffeb3b;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
+
+    h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    .answers button {
+      display: block;
+      margin: 10px auto;
+      padding: 12px;
+      width: 90%;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      background: #fff;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .answers button:hover {
+      background: #2575fc;
+      color: #fff;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    #next {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #ffeb3b;
+      color: #333;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #next:hover {
+      background: #ffc107;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌟 Simple Quiz App 🌟</h1>
+    <h2 id="question"></h2>
+    <div id="answers" class="answers"></div>
+    <button id="next">Next</button>
+  </div>
+
+  <script>
+    let score = 0;
+    let currentQ = 0;
+
+    const questionsEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+    const nextBtn = document.getElementById("next");
+
+    const quizQuestions = [
+      { question: "1) Which HTML tag is used to define the largest heading?", options: ["<h1>", "<heading>", "<head>", "<h6>"], answer: "<h1>" },
+      { question: "2) Which property is used in CSS to change text color?", options: ["background-color", "color", "font-color", "text-style"], answer: "color" },
+      { question: "3) Inside which HTML element do we put JavaScript code?", options: ["<js>", "<scripting>", "<javascript>", "<script>"], answer: "<script>" },
+      { question: "4) Which method is used to print something in the browser console in JavaScript?", options: ["print()", "console.print()", "console.log()", "log.console()"], answer: "console.log()" },
+      { question: "5) Which attribute is used in HTML to provide a unique name to an element?", options: ["class", "name", "id", "type"], answer: "id" },
+      { question: "6) Which CSS property is used to change the background color?", options: ["background-color", "color", "bgcolor", "background"], answer: "background-color" },
+      { question: "7) What does DOM stand for?", options: ["Document Object Model","Data Object Management","Document Oriented Model","Desktop Oriented Module"], answer: "Document Object Model" },
+      { question: "8) Which HTML tag is used to display an image?", options: ["<img>", "<picture>", "<image>", "<src>"], answer: "<img>" },
+      { question: "9) In JavaScript, which symbol is used for single-line comments?", options: ["//", "<!-- -->", "#", "/* */"], answer: "//" },
+      { question: "10) Which of the following is not a programming language?", options: ["Python", "HTML", "JavaScript", "C++"], answer: "HTML" }
+    ];
+
+    function loadQuestion() {
+      answersEl.innerHTML = "";
+      let q = quizQuestions[currentQ];
+      questionsEl.textContent = q.question;
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(option);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    function checkAnswer(selected) {
+      if (selected === quizQuestions[currentQ].answer) {
+        score++;
+      }
+      nextQuestion();
+    }
+
+    function nextQuestion() {
+      currentQ++;
+      if (currentQ < quizQuestions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.querySelector(".container").innerHTML = `
+        <h2>🎉 You scored ${score} out of ${quizQuestions.length} 🎉</h2>
+        <button onclick="location.reload()">Play Again</button>
+
+      <h2>🎉this app is created by hassan ali shah🎉</h2>
+        `;
+    }
+
+    nextBtn.addEventListener("click", nextQuestion);
+
+    loadQuestion();
+  </script>
+</body>
+</html>

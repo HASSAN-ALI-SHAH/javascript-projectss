@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    body{
+        background: url("calcl.png");
+        background-size: cover;
+    }
+    .container {
+      height: auto;
+      width: 322px;
+      border: 2px solid black;
+      margin: auto;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: rgb(180, 161, 133);
+    }
+
+    /* Result display */
+    #result {
+      width: 96%;
+      height: 50px;
+      font-size: 20px;
+      text-align: right;
+      margin-bottom: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    /* Buttons grid */
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4 per row */
+      gap: 10px;
+    }
+
+    button {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      font-size: 20px;
+      border: none;
+      background-color: #243a25;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+    h1{
+        color: rgb(238, 255, 221);
+    }
+  </style>
+</head>
+<body>
+  <h1 style="text-align: center;">Simple Calculator</h1>
+
+  <div class="container">
+    <input type="text" id="result" readonly>
+
+    <div class="buttons">
+      <button onclick="append('7')">7</button>
+      <button onclick="append('8')">8</button>
+      <button onclick="append('9')">9</button>
+      <button onclick="append('/')">/</button>
+
+      <button onclick="append('4')">4</button>
+      <button onclick="append('5')">5</button>
+      <button onclick="append('6')">6</button>
+      <button onclick="append('*')">*</button>
+
+      <button onclick="append('1')">1</button>
+      <button onclick="append('2')">2</button>
+      <button onclick="append('3')">3</button>
+      <button onclick="append('-')">-</button>
+
+      <button onclick="append('0')">0</button>
+      <button onclick="cleardisp()">C</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="append('+')">+</button>
+    </div>
+  </div>
+<script>
+    // user jab bhi button pem click kry woh value screen pe ashow ho -->
+    let display=document.getElementById("result");
+    function append(value){
+        display.value+=value;
+    }
+    //display ko clear krdo
+    function cleardisp(){
+        display.value="";
+    }
+   // screen pe nazazr arain values ko evaluate krny k liye 
+    function calculate(){
+try{
+    display.value=eval(display.value);
+
+}   
+//agar invalid syntex hoga to eror ayega b
+catch(error){
+    display.value="not valid"
+    
+   
+}     
+    }
+    
+</script>
+ 
+</body>
+</html>

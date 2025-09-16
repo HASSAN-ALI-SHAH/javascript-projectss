@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    /* Reset default margin & padding */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #74ebd5, #9face6);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+      width: 350px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #555;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #6c63ff;
+      outline: none;
+      box-shadow: 0px 0px 8px rgba(108, 99, 255, 0.4);
+    }
+
+    p {
+      font-size: 13px;
+      color: red;
+      margin-bottom: 8px;
+    }
+
+    #succesmsg {
+      color: green;
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    button {
+      width: 100%;
+      background: #6c63ff;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #5548e7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Signup Form</h2>
+    <form>
+      <label for="username">Username:</label>
+      <input id="username" type="text" placeholder="Enter username">
+      <p id="usererror"></p>
+
+      <label for="email">Email:</label>
+      <input id="email" type="text" placeholder="Enter email">
+      <p id="emailerror"></p>
+
+      <label for="password">Password:</label>
+      <input id="password" type="password" placeholder="Enter password">
+      <p id="passworderror"></p>
+
+      <button id="submit">Submit</button>
+      <p id="succesmsg"></p>
+    </form>
+  </div>
+
+  <script>
+    let nameInp = document.getElementById("username");
+    let emailInp = document.getElementById("email");
+    let password = document.getElementById("password");
+    let userError = document.getElementById("usererror");
+    let emailError = document.getElementById("emailerror");
+    let passwordError = document.getElementById("passworderror");
+    let submit = document.getElementById("submit");
+
+    submit.addEventListener("click", function (e) {
+      e.preventDefault();
+      let valid = true;
+
+      if (nameInp.value.trim() === "") {
+        userError.textContent = "Username is required!";
+        valid = false;
+      } else {
+        userError.textContent = "";
+      }
+
+      if (!emailInp.value.includes("@")) {
+        emailError.textContent = "Email must contain @";
+        valid = false;
+      } else {
+        emailError.textContent = "";
+      }
+
+      if (password.value.length < 8) {
+        passwordError.textContent = "Password must be at least 8 characters";
+        valid = false;
+      } else {
+        passwordError.textContent = "";
+      }
+
+      let success = document.getElementById("succesmsg");
+
+      if (valid) {
+        success.textContent = "Form submitted successfully ✅";
+        nameInp.value = "";
+        emailInp.value = "";
+        password.value = "";
+      } else {
+        success.textContent = "";
+      }
+    });
+  </script>
+</body>
+</html>

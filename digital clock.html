@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+body{
+    font-family: 'Times New Roman', Times, serif;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background: url("image\ copy.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.clock-container{
+    height: 250px;
+    width: 550px;
+    border: 3px solid rgb(56, 53, 53);
+border-radius: 13px;
+margin-top: 150px;
+margin-left:380px;
+  background: url(image\ copy.png);
+}
+h1{
+    color: white;
+}
+p{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 65px;
+color: white;
+}
+    </style>
+
+</head>
+<body>
+  
+     <div class="clock-container">
+          <H1>GIGITAL CLOCK</H1>
+<p id="clock">00:00:00</p>
+     </div>
+    
+<script>
+    function updatetime(){
+        let current=new Date();
+    
+    let clock=document.getElementById("clock");
+
+let hours=current.getHours();
+let minutes=current.getMinutes();
+let seconds=current.getSeconds();
+
+hours=hours<10?"0"+hours:hours;
+minutes=minutes<10?"0"+minutes:minutes;
+seconds=seconds<10 ?"0"+seconds:seconds;
+let timestring=hours + ":" + minutes + ":" + seconds +":"+ "  PM";
+    
+clock.textContent=timestring;
+    }
+setInterval(updatetime,1000);
+updatetime();
+</script>
+</body>
+</html>
